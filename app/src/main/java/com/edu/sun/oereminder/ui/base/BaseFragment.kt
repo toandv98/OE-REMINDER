@@ -10,6 +10,11 @@ import com.edu.sun.oereminder.utils.toast
 
 abstract class BaseFragment<V : BaseView, T : BasePresenterImpl<V>> : Fragment(), BaseView {
 
+    @get:LayoutRes
+    abstract val layoutRes: Int
+
+    abstract val presenter: T?
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,11 +29,6 @@ abstract class BaseFragment<V : BaseView, T : BasePresenterImpl<V>> : Fragment()
         setupView(savedInstanceState)
         initListener()
     }
-
-    @get:LayoutRes
-    abstract val layoutRes: Int
-
-    abstract val presenter: T?
 
     abstract fun setupView(instanceState: Bundle?)
 
