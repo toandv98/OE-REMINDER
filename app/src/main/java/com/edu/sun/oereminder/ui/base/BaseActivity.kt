@@ -9,6 +9,14 @@ import com.edu.sun.oereminder.utils.toast
 abstract class BaseActivity<V : BaseView, T : BasePresenterImpl<V>> : AppCompatActivity(),
     BaseView {
 
+    @get:StyleRes
+    abstract val styleRes: Int
+
+    @get:LayoutRes
+    abstract val layoutRes: Int
+
+    abstract val presenter: T?
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(styleRes)
@@ -17,14 +25,6 @@ abstract class BaseActivity<V : BaseView, T : BasePresenterImpl<V>> : AppCompatA
         setupView(savedInstanceState)
         initListener()
     }
-
-    @get:StyleRes
-    abstract val styleRes: Int
-
-    @get:LayoutRes
-    abstract val layoutRes: Int
-
-    abstract val presenter: T?
 
     abstract fun setupView(instanceState: Bundle?)
 
