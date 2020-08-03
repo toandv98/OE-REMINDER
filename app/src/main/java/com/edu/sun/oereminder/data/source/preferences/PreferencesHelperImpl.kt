@@ -27,9 +27,9 @@ class PreferencesHelperImpl(context: Context) : PreferencesHelper {
         @Volatile
         private var INSTANCE: PreferencesHelperImpl? = null
 
-        fun getInstance(context: Context) =
+        fun getInstance(context: Context): PreferencesHelperImpl =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: PreferencesHelperImpl(context)
+                INSTANCE ?: PreferencesHelperImpl(context).also { INSTANCE = it }
             }
     }
 }

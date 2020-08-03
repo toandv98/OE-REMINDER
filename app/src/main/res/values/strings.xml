@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OE Reminder</string>
+    <string name="title_item_time_tracking">Time tracking</string>
+    <string name="title_item_plan_report"><![CDATA[Plan & Report]]></string>
+    <string name="title_item_statistics">Statistics</string>
+    <string name="title_item_settings">Settings</string>
 </resources>

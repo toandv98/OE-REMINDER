@@ -31,7 +31,7 @@ class TimeSheetLocalDataSource(private val dbHelper: DatabaseHelper) : TimeSheet
 
         fun getInstance(dbHelper: DatabaseHelper) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: TimeSheetLocalDataSource(dbHelper)
+                INSTANCE ?: TimeSheetLocalDataSource(dbHelper).also { INSTANCE = it }
             }
     }
 }

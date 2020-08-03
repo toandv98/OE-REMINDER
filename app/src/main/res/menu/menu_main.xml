@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_time_tracking"
+        android:icon="@drawable/ic_time"
+        android:title="@string/title_item_time_tracking"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_plan_report"
+        android:icon="@drawable/ic_calendar_outline"
+        android:title="@string/title_item_plan_report"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_statistics"
+        android:icon="@drawable/ic_chart_line_outline"
+        android:title="@string/title_item_statistics"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_settings"
+        android:icon="@drawable/ic_cog_outline"
+        android:title="@string/title_item_settings"
+        app:showAsAction="ifRoom" />
+</menu>

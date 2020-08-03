@@ -91,7 +91,7 @@ class UserRemoteDataSource private constructor(private val prefsHelper: Preferen
 
         fun getInstance(prefsHelper: PreferencesHelper) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: UserRemoteDataSource(prefsHelper)
+                INSTANCE ?: UserRemoteDataSource(prefsHelper).also { INSTANCE = it }
             }
     }
 }

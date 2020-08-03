@@ -127,7 +127,7 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
 
         fun getInstance(prefsHelper: PreferencesHelper) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: MessageRemoteDataSource(prefsHelper)
+                INSTANCE ?: MessageRemoteDataSource(prefsHelper).also { INSTANCE = it }
             }
     }
 }

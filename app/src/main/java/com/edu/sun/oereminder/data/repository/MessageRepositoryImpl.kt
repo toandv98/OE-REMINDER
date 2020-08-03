@@ -128,7 +128,7 @@ class MessageRepositoryImpl private constructor(
             remote: MessageDataSource.Remote,
             appExecutors: AppExecutors
         ) = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: MessageRepositoryImpl(local, remote, appExecutors)
+            INSTANCE ?: MessageRepositoryImpl(local, remote, appExecutors).also { INSTANCE = it }
         }
     }
 }
