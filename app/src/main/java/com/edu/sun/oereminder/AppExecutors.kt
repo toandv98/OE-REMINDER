@@ -19,7 +19,6 @@ class AppExecutors private constructor(
 
     companion object {
 
-        @JvmStatic
         fun getInstance() = Holder.INSTANCE
 
         private const val KEEP_ALIVE_TIME = 1L

@@ -9,4 +9,6 @@
     <string name="label_time_in">Time in</string>
     <string name="label_time_out">Time out</string>
     <string name="label_status">Status</string>
+    <string name="text_button_check_in">Check In</string>
+    <string name="status_pending">Pending</string>
 </resources>
