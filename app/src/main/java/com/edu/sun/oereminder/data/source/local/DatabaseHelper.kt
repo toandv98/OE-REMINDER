@@ -37,7 +37,7 @@ class DatabaseHelper private constructor(context: Context) :
 
         fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: DatabaseHelper(context)
+                INSTANCE ?: DatabaseHelper(context).also { INSTANCE = it }
             }
     }
 }

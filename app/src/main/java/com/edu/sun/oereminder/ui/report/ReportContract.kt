@@ -1,11 +1,11 @@
-package com.edu.sun.oereminder.ui.main
+package com.edu.sun.oereminder.ui.report
 
 import com.edu.sun.oereminder.ui.base.BasePresenter
 import com.edu.sun.oereminder.ui.base.BaseView
 
-interface MainContract {
-
+interface ReportContract {
     interface View : BaseView {
+
     }
 
     interface Presenter : BasePresenter<View> {

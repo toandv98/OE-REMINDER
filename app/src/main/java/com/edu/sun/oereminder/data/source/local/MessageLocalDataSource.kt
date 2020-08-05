@@ -21,7 +21,7 @@ class MessageLocalDataSource(private var dbHelper: DatabaseHelper) : MessageData
 
         fun getInstance(dbHelper: DatabaseHelper) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: MessageLocalDataSource(dbHelper)
+                INSTANCE ?: MessageLocalDataSource(dbHelper).also { INSTANCE = it }
             }
     }
 }

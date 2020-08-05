@@ -25,7 +25,7 @@ class UserLocalDataSource(private var dbHelper: DatabaseHelper) : UserDataSource
 
         fun getInstance(dbHelper: DatabaseHelper) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: UserLocalDataSource(dbHelper)
+                INSTANCE ?: UserLocalDataSource(dbHelper).also { INSTANCE = it }
             }
     }
 }

@@ -58,7 +58,7 @@ class TimeSheetRepositoryImpl(
             local: TimeSheetDataSource.Local,
             appExecutors: AppExecutors
         ) = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: TimeSheetRepositoryImpl(local, appExecutors)
+            INSTANCE ?: TimeSheetRepositoryImpl(local, appExecutors).also { INSTANCE = it }
         }
     }
 }

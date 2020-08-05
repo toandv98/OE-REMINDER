@@ -98,7 +98,7 @@ class UserRepositoryImpl private constructor(
             remote: UserDataSource.Remote,
             appExecutors: AppExecutors
         ) = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: UserRepositoryImpl(local, remote, appExecutors)
+            INSTANCE ?: UserRepositoryImpl(local, remote, appExecutors).also { INSTANCE = it }
         }
     }
 }
