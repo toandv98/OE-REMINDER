@@ -17,6 +17,7 @@ abstract class BaseActivity<V : BaseView, T : BasePresenterImpl<V>> : AppCompatA
 
     abstract val presenter: T?
 
+    @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(styleRes)

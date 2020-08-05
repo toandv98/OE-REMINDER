@@ -23,6 +23,7 @@ abstract class BaseFragment<V : BaseView, T : BasePresenterImpl<V>> : Fragment()
         return inflater.inflate(layoutRes, container, false)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter?.attachView(this as V)
