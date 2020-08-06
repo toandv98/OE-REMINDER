@@ -1,12 +1,19 @@
 package com.edu.sun.oereminder.ui.timetracking
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.util.Pair
+import androidx.fragment.app.setFragmentResultListener
 import com.edu.sun.oereminder.R
 import com.edu.sun.oereminder.data.model.TimeRecord
 import com.edu.sun.oereminder.ui.base.BaseFragment
+import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment
 import com.edu.sun.oereminder.ui.timetracking.TimeTrackingContract.View
 import com.edu.sun.oereminder.utils.*
+import com.edu.sun.oereminder.utils.FragmentConst.KEY_CHECK_IN
+import com.edu.sun.oereminder.utils.FragmentConst.KEY_SEND_REPORT
+import com.edu.sun.oereminder.utils.FragmentConst.REQUEST_CHECK_IN
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_time_tracking.*
@@ -66,19 +73,30 @@ class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
         }
 
         fabCheckIn.setOnClickListener {
+            navigateToCheckIn()
+        }
 
+        setFragmentResultListener(REQUEST_CHECK_IN) { _, bundle ->
+            when (bundle[REQUEST_CHECK_IN]) {
+                KEY_SEND_REPORT -> {
+
+                }
+                KEY_CHECK_IN -> {
+
+                }
+            }
         }
     }
 
     override fun showOrHideFab(isShow: Boolean) {
-
+        fabCheckIn.visibility = if (isShow) VISIBLE else GONE
     }
 
     override fun updateRecyclerView(timeRecords: List<TimeRecord>) {
-
+        timeTrackingAdapter.submitList(timeRecords)
     }
 
     override fun navigateToCheckIn() {
-
+        CheckInDialogFragment().show(parentFragmentManager, CheckInDialogFragment::class.simpleName)
     }
 }

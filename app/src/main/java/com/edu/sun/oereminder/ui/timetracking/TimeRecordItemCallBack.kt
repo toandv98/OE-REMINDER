@@ -7,6 +7,6 @@ class TimeRecordItemCallBack : DiffUtil.ItemCallback<TimeRecord>() {
     override fun areItemsTheSame(oldItem: TimeRecord, newItem: TimeRecord) =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: TimeRecord, newItem: TimeRecord): Boolean =
+    override fun areContentsTheSame(oldItem: TimeRecord, newItem: TimeRecord) =
         oldItem == newItem
 }

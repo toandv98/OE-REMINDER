@@ -39,6 +39,5 @@ class TimeRecordAdapter : ListAdapter<TimeRecord, ViewHolder>(TimeRecordItemCall
             }
         }
     }
-
 }
 
