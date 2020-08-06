@@ -24,7 +24,7 @@
         android:paddingEnd="@dimen/dp_16"
         android:textAllCaps="false"
         android:textColor="@color/color_accent"
-        android:textSize="@dimen/text_size_normal"
+        android:textSize="@dimen/sp_16"
         app:cornerRadius="@dimen/dp_8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

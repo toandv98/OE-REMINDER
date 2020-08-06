@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_check_in_tag">
+    <target
+        android:name="rotationGroup"
+        android:animation="@animator/rotation_check_in" />
+    <target
+        android:name="check"
+        android:animation="@animator/scale_check" />
+    <target
+        android:name="star"
+        android:animation="@animator/scale_star" />
+</animated-vector>
