@@ -73,9 +73,19 @@ object SQLiteConst {
 }
 
 object FragmentConst {
-    const val KEY_SEND_REPORT = "key_send_report"
-    const val KEY_CHECK_IN = "key_check_in"
-    const val KEY_CHECK_OUT = "key_check_out"
+    const val CODE_SEND_REPORT = 2
+    const val CODE_CHECK_IN = 0
+    const val CODE_CHECK_OUT = 1
     const val REQUEST_CHECK_IN = "request_check_in"
     const val IS_CHECK_IN = "is_check_in"
+}
+
+object WorkTime {
+    const val START_HOUR = 7L
+    const val START_MINUS = 45L
+    const val FINISH_HOUR = 16L
+    const val FINISH_MINUS = 45L
+
+    const val ON_TIME = "On Time"
+    const val LATE = "Late"
 }

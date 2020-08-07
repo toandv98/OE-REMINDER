@@ -14,6 +14,13 @@ import kotlinx.android.synthetic.main.item_time_record.view.*
 
 class TimeRecordAdapter : ListAdapter<TimeRecord, ViewHolder>(TimeRecordItemCallBack()) {
 
+    fun submitFirstItem(timeRecord: TimeRecord) {
+        if (currentList.isNotEmpty()) {
+            submitList(currentList.toMutableList().apply { set(0, timeRecord) })
+            notifyItemChanged(0)
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_time_record, parent, false)
@@ -25,19 +32,16 @@ class TimeRecordAdapter : ListAdapter<TimeRecord, ViewHolder>(TimeRecordItemCall
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(timeRecord: TimeRecord) {
+        fun bind(timeRecord: TimeRecord) = timeRecord.let {
             with(itemView) {
-                with(timeRecord) {
-                    textTimeIn.text = timeInCalendar.toTime()
-                    textTimeOut.text = timeOutCalendar.toTime()
-                    textDate.text = dateCalendar.toDate()
-                    textStatus.text = if (status.isBlank()) {
-                        context.getString(R.string.status_pending)
-                    } else status
-                    textPartOfDay.text = partOfDay
-                }
+                textTimeIn.text = it.timeInCalendar.toTime()
+                textTimeOut.text = it.timeOutCalendar.toTime()
+                textDate.text = it.dateCalendar.toDate()
+                textStatus.text = if (it.status.isBlank()) {
+                    context.getString(R.string.status_pending)
+                } else it.status
+                textPartOfDay.text = it.partOfDay
             }
         }
     }
 }
-
