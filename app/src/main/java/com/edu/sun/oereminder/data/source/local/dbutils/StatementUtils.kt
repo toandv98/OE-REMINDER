@@ -18,6 +18,7 @@ object StatementConst {
     const val GREATER_OR_EQUAL = " >=? "
     const val LESS_OR_EQUAL = " <=? "
     const val BETWEEN = " between ? and ? "
+    const val DESC = " desc "
 }
 
 data class DatabaseSchema(

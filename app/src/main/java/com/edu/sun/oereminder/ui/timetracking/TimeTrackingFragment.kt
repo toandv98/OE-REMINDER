@@ -11,8 +11,6 @@ import com.edu.sun.oereminder.ui.base.BaseFragment
 import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment
 import com.edu.sun.oereminder.ui.timetracking.TimeTrackingContract.View
 import com.edu.sun.oereminder.utils.*
-import com.edu.sun.oereminder.utils.FragmentConst.KEY_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.KEY_SEND_REPORT
 import com.edu.sun.oereminder.utils.FragmentConst.REQUEST_CHECK_IN
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -23,7 +21,7 @@ import java.util.*
 class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
 
     private var picker: MaterialDatePicker<Pair<Long, Long>>? = null
-    private val timeTrackingAdapter = TimeRecordAdapter()
+    private val timeTrackingAdapter by lazy { TimeRecordAdapter() }
 
     override val layoutRes get() = R.layout.fragment_time_tracking
 
@@ -36,22 +34,19 @@ class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
     override fun setupView(instanceState: Bundle?) {
 
         toolbar.setTitle(R.string.title_item_time_tracking)
-        presenter.load()
+        presenter.loadScreen()
 
         GregorianCalendar().run {
-            btnDatePicker.text =
-                getString(
-                    R.string.date_range_format,
-                    firstDayOfMonth().toDate(DATE_FORMAT),
-                    lastDayOfMonth().toDate(DATE_FORMAT)
-                )
-            presenter.onDateSelected(firstDayOfMonth().timeInMillis, lastDayOfMonth().timeInMillis)
+            btnDatePicker.text = getString(
+                R.string.date_range_format,
+                firstDayOfMonth().toDate(DATE_FORMAT),
+                lastDayOfMonth().toDate(DATE_FORMAT)
+            )
         }
+        presenter.selectedDate(firstMillisOfMonth(), lastMillisOfDay())
 
         picker = MaterialDatePicker.Builder.dateRangePicker().apply {
-            setCalendarConstraints(
-                CalendarConstraints.Builder().setEnd(GregorianCalendar().timeInMillis).build()
-            )
+            setCalendarConstraints(CalendarConstraints.Builder().setEnd(now()).build())
         }.build()
 
         recyclerTimeTracking.adapter = timeTrackingAdapter
@@ -65,38 +60,39 @@ class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
 
         picker?.addOnPositiveButtonClickListener {
             btnDatePicker.text = picker?.headerText
-            it.first?.let { from ->
-                it.second?.let { to ->
-                    presenter.onDateSelected(from, to)
-                }
-            }
+            val from = it.first
+            val to = it.second
+            if (from != null && to != null) presenter.selectedDate(from, to)
         }
 
-        fabCheckIn.setOnClickListener {
-            navigateToCheckIn()
-        }
+        fabCheckIn.setOnClickListener { presenter.onFabClick() }
 
         setFragmentResultListener(REQUEST_CHECK_IN) { _, bundle ->
-            when (bundle[REQUEST_CHECK_IN]) {
-                KEY_SEND_REPORT -> {
-
-                }
-                KEY_CHECK_IN -> {
-
-                }
-            }
+            presenter.onCheckResult(bundle.getInt(REQUEST_CHECK_IN))
         }
     }
 
-    override fun showOrHideFab(isShow: Boolean) {
-        fabCheckIn.visibility = if (isShow) VISIBLE else GONE
+    override fun updateFab(isShow: Boolean, isCheckIn: Boolean) {
+        fabCheckIn.run {
+            visibility = if (isShow) VISIBLE else GONE
+            setText(if (isCheckIn) R.string.text_button_check_in else R.string.text_button_check_out)
+        }
     }
 
     override fun updateRecyclerView(timeRecords: List<TimeRecord>) {
         timeTrackingAdapter.submitList(timeRecords)
     }
 
-    override fun navigateToCheckIn() {
-        CheckInDialogFragment().show(parentFragmentManager, CheckInDialogFragment::class.simpleName)
+    override fun updateRecyclerView(firstItem: TimeRecord) {
+        timeTrackingAdapter.submitFirstItem(firstItem)
+    }
+
+    override fun navigateToCheckIn(isCheckIn: Boolean) {
+        CheckInDialogFragment.newInstance(isCheckIn)
+            .show(parentFragmentManager, CheckInDialogFragment::class.simpleName)
+    }
+
+    override fun navigateToSendReport(isPlan: Boolean) {
+
     }
 }

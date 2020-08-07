@@ -4,6 +4,10 @@ import com.edu.sun.oereminder.AppExecutors
 import com.edu.sun.oereminder.data.SourceCallback
 import com.edu.sun.oereminder.data.model.TimeRecord
 import com.edu.sun.oereminder.data.source.TimeSheetDataSource
+import com.edu.sun.oereminder.utils.firstMillisOfDay
+import com.edu.sun.oereminder.utils.from
+import com.edu.sun.oereminder.utils.lastMillisOfDay
+import java.util.*
 
 class TimeSheetRepositoryImpl(
     private val local: TimeSheetDataSource.Local,
@@ -19,15 +23,29 @@ class TimeSheetRepositoryImpl(
         }
     }
 
-    override fun getCheckedTimeRecords(
+    override fun getTimeRecords(
         from: Long,
         to: Long,
         callback: SourceCallback<List<TimeRecord>>
     ) {
         with(appExecutors) {
             diskIO.execute {
-                val timeRecords = local.getCheckedTimeRecords(from, to)
+                val timeRecords = local.getTimeRecords(from, to)
                 mainThread.execute { callback.onSuccess(timeRecords) }
+            }
+        }
+    }
+
+    override fun getTimeRecord(date: Long, callback: SourceCallback<TimeRecord>) {
+        with(appExecutors) {
+            diskIO.execute {
+                val calendar = GregorianCalendar().from(date)
+                val timeRecords =
+                    local.getTimeRecords(calendar.firstMillisOfDay(), calendar.lastMillisOfDay())
+                        .firstOrNull()
+                mainThread.execute {
+                    timeRecords?.let(callback::onSuccess) ?: callback.onError(Exception())
+                }
             }
         }
     }

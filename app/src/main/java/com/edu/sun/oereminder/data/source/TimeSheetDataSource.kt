@@ -7,7 +7,7 @@ interface TimeSheetDataSource {
 
         fun getNextTimeRecords(): List<TimeRecord>
 
-        fun getCheckedTimeRecords(from: Long, to: Long): List<TimeRecord>
+        fun getTimeRecords(from: Long, to: Long): List<TimeRecord>
 
         fun updateTimeRecord(timeRecord: TimeRecord)
 

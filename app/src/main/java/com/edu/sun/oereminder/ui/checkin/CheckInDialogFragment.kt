@@ -14,10 +14,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.transition.Slide
 import com.edu.sun.oereminder.R
+import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_IN
+import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_OUT
+import com.edu.sun.oereminder.utils.FragmentConst.CODE_SEND_REPORT
 import com.edu.sun.oereminder.utils.FragmentConst.IS_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.KEY_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.KEY_CHECK_OUT
-import com.edu.sun.oereminder.utils.FragmentConst.KEY_SEND_REPORT
 import com.edu.sun.oereminder.utils.FragmentConst.REQUEST_CHECK_IN
 import com.edu.sun.oereminder.utils.beginTransition
 import com.edu.sun.oereminder.utils.changeResource
@@ -52,7 +52,7 @@ class CheckInDialogFragment : DialogFragment() {
 
         btnBack.setOnClickListener { dismiss() }
         btnSendReport.setOnClickListener {
-            setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to KEY_SEND_REPORT))
+            setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to CODE_SEND_REPORT))
         }
 
         switchCheckIn.setOnCheckedChangeListener { _, isChecked ->
@@ -71,7 +71,7 @@ class CheckInDialogFragment : DialogFragment() {
         switchCheckIn.visibility = INVISIBLE
         btnSendReport.visibility = VISIBLE
         textCheckIn.text = getString(R.string.time_in_format, GregorianCalendar().toTime())
-        setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to KEY_CHECK_IN))
+        setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to CODE_CHECK_IN))
     }
 
     private fun checkOut() {
@@ -79,7 +79,7 @@ class CheckInDialogFragment : DialogFragment() {
         btnSendReport.visibility = VISIBLE
         imageCheckIn.changeResource(R.drawable.ic_check_out)
         textCheckIn.text = getString(R.string.time_out_format, GregorianCalendar().toTime())
-        setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to KEY_CHECK_OUT))
+        setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to CODE_CHECK_OUT))
     }
 
     override fun getTheme() = R.style.DialogFullScreenStyle
