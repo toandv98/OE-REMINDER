@@ -9,11 +9,8 @@ class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository
     BasePresenterImpl<View>(), Presenter {
 
     override fun load() {
-
     }
 
     override fun onDateSelected(from: Long, to: Long) {
-
     }
-
 }
