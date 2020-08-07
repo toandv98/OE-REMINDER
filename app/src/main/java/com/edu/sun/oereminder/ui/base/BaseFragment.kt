@@ -35,6 +35,11 @@ abstract class BaseFragment<V : BaseView, T : BasePresenterImpl<V>> : Fragment()
 
     abstract fun initListener()
 
+    override fun onDestroyView() {
+        presenter?.detachView()
+        super.onDestroyView()
+    }
+
     override fun showMessage(msg: String) {
         context?.toast(msg)
     }

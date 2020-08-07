@@ -5,10 +5,8 @@ import com.edu.sun.oereminder.ui.base.BaseView
 
 interface StatisticsContract {
     interface View : BaseView {
-
     }
 
     interface Presenter : BasePresenter<View> {
-
     }
 }
