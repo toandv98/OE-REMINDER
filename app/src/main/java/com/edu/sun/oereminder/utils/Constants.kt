@@ -71,3 +71,11 @@ object SQLiteConst {
     const val TABLE_NAME_ROOM = "tb_room"
     const val TABLE_NAME_TIME_RECORDS = "tb_time_record"
 }
+
+object FragmentConst {
+    const val KEY_SEND_REPORT = "key_send_report"
+    const val KEY_CHECK_IN = "key_check_in"
+    const val KEY_CHECK_OUT = "key_check_out"
+    const val REQUEST_CHECK_IN = "request_check_in"
+    const val IS_CHECK_IN = "is_check_in"
+}

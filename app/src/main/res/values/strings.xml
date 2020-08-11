@@ -6,14 +6,18 @@
     <string name="title_item_settings">Settings</string>
     <string name="date_range_format">%s ➞ %s</string>
     <string name="time_in_format">Time in ➞ %s</string>
+    <string name="time_out_format">Time out ➞ %s</string>
     <string name="label_shift_work">Shift work</string>
     <string name="label_time_in">Time in</string>
     <string name="label_time_out">Time out</string>
     <string name="label_status">Status</string>
     <string name="text_button_check_in">Check In</string>
+    <string name="text_button_check_out">Check Out</string>
     <string name="status_pending">Pending</string>
     <string name="description_check_in_image">Check In image</string>
     <string name="description_close_image">close button image</string>
     <string name="label_daily_check_in">Daily check in</string>
+    <string name="label_daily_check_out">Daily check out</string>
     <string name="text_daily_plan">Daily plan</string>
+    <string name="text_daily_report">Daily report</string>
 </resources>
