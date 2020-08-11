@@ -8,9 +8,9 @@ import com.edu.sun.oereminder.R
 import com.edu.sun.oereminder.data.model.TimeRecord
 import com.edu.sun.oereminder.ui.base.BaseFragment
 import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment
+import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment.Companion.REQUEST_CHECK_IN
 import com.edu.sun.oereminder.ui.timetracking.TimeTrackingContract.View
 import com.edu.sun.oereminder.utils.*
-import com.edu.sun.oereminder.utils.FragmentConst.REQUEST_CHECK_IN
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_time_tracking.*
@@ -45,7 +45,9 @@ class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
         presenter.selectedDate(firstMillisOfMonth(), lastMillisOfDay())
 
         picker = MaterialDatePicker.Builder.dateRangePicker().apply {
-            setCalendarConstraints(CalendarConstraints.Builder().setEnd(now()).build())
+            setCalendarConstraints(
+                CalendarConstraints.Builder().setEnd(System.currentTimeMillis()).build()
+            )
         }.build()
 
         recyclerTimeTracking.adapter = timeTrackingAdapter

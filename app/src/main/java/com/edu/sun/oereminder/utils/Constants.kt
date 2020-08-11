@@ -60,6 +60,7 @@ object PrefsConst {
     const val ENCRYPTED_PREFS_NAME = "secret_shared_prefs"
     const val KEY_API_TOKEN = "chat_work_token"
     const val KEY_ROOM_ID = "room_id"
+    const val KEY_ACC_ID = "account_id"
 }
 
 object SQLiteConst {
@@ -70,14 +71,7 @@ object SQLiteConst {
     const val TABLE_NAME_ACCOUNT = "tb_account"
     const val TABLE_NAME_ROOM = "tb_room"
     const val TABLE_NAME_TIME_RECORDS = "tb_time_record"
-}
-
-object FragmentConst {
-    const val CODE_SEND_REPORT = 2
-    const val CODE_CHECK_IN = 0
-    const val CODE_CHECK_OUT = 1
-    const val REQUEST_CHECK_IN = "request_check_in"
-    const val IS_CHECK_IN = "is_check_in"
+    const val REPORT_LIMIT = 200
 }
 
 object WorkTime {

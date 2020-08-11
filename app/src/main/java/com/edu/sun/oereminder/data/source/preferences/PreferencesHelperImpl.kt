@@ -3,6 +3,7 @@ package com.edu.sun.oereminder.data.source.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import com.edu.sun.oereminder.utils.PrefsConst.ENCRYPTED_PREFS_NAME
+import com.edu.sun.oereminder.utils.PrefsConst.KEY_ACC_ID
 import com.edu.sun.oereminder.utils.PrefsConst.KEY_API_TOKEN
 import com.edu.sun.oereminder.utils.PrefsConst.KEY_ROOM_ID
 import com.edu.sun.oereminder.utils.defaultPrefs
@@ -22,6 +23,8 @@ class PreferencesHelperImpl(context: Context) : PreferencesHelper {
     override fun getApiToken() = encryptedPrefs?.get(KEY_API_TOKEN, "") ?: ""
 
     override fun getRoomId() = defaultPrefs?.get(KEY_ROOM_ID, "") ?: ""
+
+    override fun getAccountId() = defaultPrefs?.get(KEY_ACC_ID, 0L) ?: 0L
 
     companion object {
         @Volatile

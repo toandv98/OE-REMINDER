@@ -4,4 +4,6 @@ interface PreferencesHelper {
     fun getApiToken(): String
 
     fun getRoomId(): String
+
+    fun getAccountId(): Long
 }

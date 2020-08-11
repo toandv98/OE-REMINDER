@@ -52,7 +52,9 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
 
                 override fun onSuccess(data: String) {
                     try {
-                        callback.onSuccess(data.parseJsonArray())
+                        val messages = data.parseJsonArray<Message>()
+                            .filter { it.accountId == prefsHelper.getAccountId() && it.isPlan }
+                        callback.onSuccess(messages)
                     } catch (e: JSONException) {
                         callback.onError(e)
                     }

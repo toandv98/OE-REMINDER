@@ -9,6 +9,7 @@ import com.edu.sun.oereminder.utils.ColumnName.TIME_IN
 import com.edu.sun.oereminder.utils.ColumnName.TIME_OUT
 import com.edu.sun.oereminder.utils.ColumnName.WORK_DATE
 import com.edu.sun.oereminder.utils.SQLiteConst.TABLE_NAME_TIME_RECORDS
+import com.edu.sun.oereminder.utils.from
 import java.util.*
 
 @Table(tableName = TABLE_NAME_TIME_RECORDS)
@@ -29,18 +30,9 @@ data class TimeRecord(
         partOfDay = partOfDay
     )
 
-    val dateCalendar
-        get() = GregorianCalendar().apply {
-            timeInMillis = workDate
-        }
+    val dateCalendar get() = GregorianCalendar().from(workDate)
 
-    val timeInCalendar
-        get() = GregorianCalendar().apply {
-            timeInMillis = timeIn
-        }
+    val timeInCalendar get() = GregorianCalendar().from(timeIn)
 
-    val timeOutCalendar
-        get() = GregorianCalendar().apply {
-            timeInMillis = timeOut
-        }
+    val timeOutCalendar get() = GregorianCalendar().from(timeOut)
 }
