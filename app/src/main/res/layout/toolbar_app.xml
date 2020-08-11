@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/colorBackground"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8"
         android:theme="@style/Widget.MaterialComponents.Toolbar"
         app:elevation="0dp"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline" />
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:titleTextColor="@color/color_accent" />
 </com.google.android.material.appbar.AppBarLayout>

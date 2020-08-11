@@ -20,4 +20,7 @@
     <string name="label_daily_check_out">Daily check out</string>
     <string name="text_daily_plan">Daily plan</string>
     <string name="text_daily_report">Daily report</string>
+    <string name="description_icon_info">icon info</string>
+    <string name="title_search">Search</string>
+    <string name="hint_search_report">Search report</string>
 </resources>
