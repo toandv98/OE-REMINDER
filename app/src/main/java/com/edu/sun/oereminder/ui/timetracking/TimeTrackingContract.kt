@@ -7,17 +7,25 @@ import com.edu.sun.oereminder.ui.base.BaseView
 interface TimeTrackingContract {
     interface View : BaseView {
 
-        fun showOrHideFab(isShow: Boolean)
+        fun updateFab(isShow: Boolean, isCheckIn: Boolean = true)
 
         fun updateRecyclerView(timeRecords: List<TimeRecord>)
 
-        fun navigateToCheckIn()
+        fun updateRecyclerView(firstItem: TimeRecord)
+
+        fun navigateToCheckIn(isCheckIn: Boolean)
+
+        fun navigateToSendReport(isPlan: Boolean)
     }
 
     interface Presenter : BasePresenter<View> {
 
-        fun load()
+        fun loadScreen()
 
-        fun onDateSelected(from: Long, to: Long)
+        fun onFabClick()
+
+        fun selectedDate(from: Long, to: Long)
+
+        fun onCheckResult(code: Int)
     }
 }

@@ -7,7 +7,9 @@ interface TimeSheetRepository {
 
     fun getNextTimeRecords(callback: SourceCallback<List<TimeRecord>>)
 
-    fun getCheckedTimeRecords(from: Long, to: Long, callback: SourceCallback<List<TimeRecord>>)
+    fun getTimeRecords(from: Long, to: Long, callback: SourceCallback<List<TimeRecord>>)
+
+    fun getTimeRecord(date: Long, callback: SourceCallback<TimeRecord>)
 
     fun updateTimeRecord(timeRecord: TimeRecord)
 

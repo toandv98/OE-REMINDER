@@ -4,6 +4,7 @@ import com.edu.sun.oereminder.data.model.TimeRecord
 import com.edu.sun.oereminder.data.source.TimeSheetDataSource
 import com.edu.sun.oereminder.data.source.local.dbutils.Predicate
 import com.edu.sun.oereminder.data.source.local.dbutils.StatementConst.BETWEEN
+import com.edu.sun.oereminder.data.source.local.dbutils.StatementConst.DESC
 import com.edu.sun.oereminder.data.source.local.dbutils.StatementConst.GREATER
 import com.edu.sun.oereminder.utils.ColumnName.WORK_DATE
 
@@ -14,9 +15,10 @@ class TimeSheetLocalDataSource(private val dbHelper: DatabaseHelper) : TimeSheet
         Predicate("$WORK_DATE$GREATER", System.currentTimeMillis().toString())
     )
 
-    override fun getCheckedTimeRecords(from: Long, to: Long) = dbHelper.get(
+    override fun getTimeRecords(from: Long, to: Long) = dbHelper.get(
         TimeRecord::class,
-        Predicate("$WORK_DATE$BETWEEN", listOf(from.toString(), to.toString()))
+        Predicate("$WORK_DATE$BETWEEN", listOf(from.toString(), to.toString())),
+        "$WORK_DATE$DESC"
     )
 
     override fun updateTimeRecord(timeRecord: TimeRecord) = dbHelper.update(timeRecord)
