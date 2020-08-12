@@ -13,22 +13,20 @@ class MessageRepositoryImpl private constructor(
 
     override fun getMessages(callback: SourceCallback<List<Message>>) {
         with(appExecutors) {
+            diskIO.execute {
+                val data = local.getMessages()
+                mainThread.execute { callback.onSuccess(data) }
+            }
             networkIO.execute {
                 remote.getMessages(object : SourceCallback<List<Message>> {
 
                     override fun onSuccess(data: List<Message>) {
-                        mainThread.execute { callback.onSuccess(data) }
+                        mainThread.execute { callback.onSuccess(data.reversed()) }
                         diskIO.execute { local.updateMessages(data) }
                     }
 
                     override fun onError(e: Exception) {
-                        diskIO.execute {
-                            val cached = local.getMessages()
-                            mainThread.execute {
-                                callback.onError(e)
-                                callback.onSuccess(cached)
-                            }
-                        }
+                        mainThread.execute { callback.onError(e) }
                     }
                 })
             }

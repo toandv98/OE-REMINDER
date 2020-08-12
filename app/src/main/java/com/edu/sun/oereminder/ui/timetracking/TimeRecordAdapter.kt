@@ -12,7 +12,7 @@ import com.edu.sun.oereminder.utils.toDate
 import com.edu.sun.oereminder.utils.toTime
 import kotlinx.android.synthetic.main.item_time_record.view.*
 
-class TimeRecordAdapter : ListAdapter<TimeRecord, ViewHolder>(TimeRecordItemCallBack()) {
+class TimeRecordAdapter : ListAdapter<TimeRecord, ViewHolder>(TimeRecordItemCallback()) {
 
     fun submitFirstItem(timeRecord: TimeRecord) {
         if (currentList.isNotEmpty()) {

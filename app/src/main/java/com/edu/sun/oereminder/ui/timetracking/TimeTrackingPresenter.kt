@@ -4,17 +4,16 @@ import com.edu.sun.oereminder.data.SourceCallback
 import com.edu.sun.oereminder.data.model.TimeRecord
 import com.edu.sun.oereminder.data.repository.TimeSheetRepository
 import com.edu.sun.oereminder.ui.base.BasePresenterImpl
+import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment.Companion.CODE_CHECK_IN
+import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment.Companion.CODE_CHECK_OUT
+import com.edu.sun.oereminder.ui.checkin.CheckInDialogFragment.Companion.CODE_SEND_REPORT
 import com.edu.sun.oereminder.ui.timetracking.TimeTrackingContract.Presenter
 import com.edu.sun.oereminder.ui.timetracking.TimeTrackingContract.View
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_OUT
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_SEND_REPORT
 import com.edu.sun.oereminder.utils.WorkTime.LATE
 import com.edu.sun.oereminder.utils.WorkTime.ON_TIME
 import com.edu.sun.oereminder.utils.WorkTime.START_HOUR
 import com.edu.sun.oereminder.utils.WorkTime.START_MINUS
 import com.edu.sun.oereminder.utils.millisUtil
-import com.edu.sun.oereminder.utils.now
 
 class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository) :
     BasePresenterImpl<View>(), Presenter {
@@ -24,7 +23,7 @@ class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository
     private var currentTimeRecord: TimeRecord? = null
 
     override fun loadScreen() = timeSheetRepository.getTimeRecord(
-        now(), object : SourceCallback<TimeRecord> {
+        System.currentTimeMillis(), object : SourceCallback<TimeRecord> {
             override fun onSuccess(data: TimeRecord) {
                 data.run {
                     currentTimeRecord = this
@@ -60,12 +59,12 @@ class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository
         currentTimeRecord?.run {
             when (code) {
                 CODE_CHECK_IN -> {
-                    timeIn = now()
+                    timeIn = System.currentTimeMillis()
                     status = if (timeIn <= millisUtil(START_HOUR, START_MINUS)) ON_TIME else LATE
                     isCheckIn = false
                 }
                 CODE_CHECK_OUT -> {
-                    timeOut = now()
+                    timeOut = System.currentTimeMillis()
                     isShowFab = false
                 }
                 CODE_SEND_REPORT -> view?.navigateToSendReport(isCheckIn)

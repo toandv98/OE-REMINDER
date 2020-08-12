@@ -14,11 +14,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.transition.Slide
 import com.edu.sun.oereminder.R
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_CHECK_OUT
-import com.edu.sun.oereminder.utils.FragmentConst.CODE_SEND_REPORT
-import com.edu.sun.oereminder.utils.FragmentConst.IS_CHECK_IN
-import com.edu.sun.oereminder.utils.FragmentConst.REQUEST_CHECK_IN
 import com.edu.sun.oereminder.utils.beginTransition
 import com.edu.sun.oereminder.utils.changeResource
 import com.edu.sun.oereminder.utils.toTime
@@ -85,6 +80,12 @@ class CheckInDialogFragment : DialogFragment() {
     override fun getTheme() = R.style.DialogFullScreenStyle
 
     companion object {
+        const val CODE_SEND_REPORT = 2
+        const val CODE_CHECK_IN = 0
+        const val CODE_CHECK_OUT = 1
+        const val REQUEST_CHECK_IN = "request_check_in"
+        const val IS_CHECK_IN = "is_check_in"
+
         fun newInstance(isCheckIn: Boolean) = CheckInDialogFragment().apply {
             arguments = bundleOf(IS_CHECK_IN to isCheckIn)
         }
