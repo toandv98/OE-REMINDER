@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_date_time"
         android:textAllCaps="false"
-        android:textColor="@color/color_primary_dark"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

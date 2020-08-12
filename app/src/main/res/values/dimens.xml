@@ -15,4 +15,7 @@
     <dimen name="scale_2">2</dimen>
     <dimen name="sp_28">28sp</dimen>
     <dimen name="dp_180">180dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_28">28dp</dimen>
 </resources>

@@ -1,9 +1,8 @@
 package com.edu.sun.oereminder.ui.timetracking
 
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.core.util.Pair
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import com.edu.sun.oereminder.R
 import com.edu.sun.oereminder.data.model.TimeRecord
@@ -74,7 +73,7 @@ class TimeTrackingFragment : BaseFragment<View, TimeTrackingPresenter>(), View {
 
     override fun updateFab(isShow: Boolean, isCheckIn: Boolean) {
         fabCheckIn.run {
-            visibility = if (isShow) VISIBLE else GONE
+            isVisible = isShow
             setText(if (isCheckIn) R.string.text_button_check_in else R.string.text_button_check_out)
         }
     }
