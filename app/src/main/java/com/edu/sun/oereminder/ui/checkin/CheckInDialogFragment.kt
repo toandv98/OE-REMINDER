@@ -77,7 +77,7 @@ class CheckInDialogFragment : DialogFragment() {
         setFragmentResult(REQUEST_CHECK_IN, bundleOf(REQUEST_CHECK_IN to CODE_CHECK_OUT))
     }
 
-    override fun getTheme() = R.style.DialogFullScreenStyle
+    override fun getTheme() = R.style.CheckInDialogStyle
 
     companion object {
         const val CODE_SEND_REPORT = 2

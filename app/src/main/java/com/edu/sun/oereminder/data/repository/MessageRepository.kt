@@ -7,9 +7,11 @@ interface MessageRepository {
 
     fun getMessages(callback: SourceCallback<List<Message>>)
 
-    fun sendMessage(message: String, callback: SourceCallback<Message>)
+    fun getUpdatedMessage(messageId: Long, callback: SourceCallback<List<Message>>)
 
-    fun updateMessage(messageId: Int, message: String, callback: SourceCallback<Message>)
+    fun sendMessage(message: String, callback: SourceCallback<Long>)
 
-    fun deleteMessage(messageId: Int, callback: SourceCallback<Long>)
+    fun updateMessage(messageId: Long, message: String, callback: SourceCallback<Long>)
+
+    fun deleteMessage(messageId: Long, callback: SourceCallback<List<Message>>)
 }

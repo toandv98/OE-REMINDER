@@ -9,7 +9,7 @@ import androidx.annotation.IdRes
 import androidx.transition.Transition
 import androidx.transition.TransitionManager.beginDelayedTransition
 
-const val DEFAULT_DURATION = 300L
+const val DEFAULT_DURATION = 250L
 
 fun ViewGroup.beginTransition(
     transition: Transition,

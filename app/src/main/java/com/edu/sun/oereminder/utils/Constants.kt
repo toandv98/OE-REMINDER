@@ -61,6 +61,7 @@ object PrefsConst {
     const val KEY_API_TOKEN = "chat_work_token"
     const val KEY_ROOM_ID = "room_id"
     const val KEY_ACC_ID = "account_id"
+    const val KEY_TRAINER_GROUP = "trainer_group"
 }
 
 object SQLiteConst {

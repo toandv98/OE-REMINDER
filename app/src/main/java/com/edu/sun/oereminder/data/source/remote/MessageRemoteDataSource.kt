@@ -7,6 +7,7 @@ import com.edu.sun.oereminder.data.source.preferences.PreferencesHelper
 import com.edu.sun.oereminder.utils.ApiEndPoint.BASE_URL
 import com.edu.sun.oereminder.utils.ApiEndPoint.ENDPOINT_MESSAGES
 import com.edu.sun.oereminder.utils.ApiEndPoint.ENDPOINT_ROOMS
+import com.edu.sun.oereminder.utils.ColumnName.MESSAGE_ID
 import com.edu.sun.oereminder.utils.NetConst.FORCE_MESSAGE
 import com.edu.sun.oereminder.utils.NetConst.KEY_BODY
 import com.edu.sun.oereminder.utils.NetConst.KEY_TOKEN_CHATWORK
@@ -17,6 +18,8 @@ import com.edu.sun.oereminder.utils.NetConst.METHOD_PUT
 import com.edu.sun.oereminder.utils.parseJsonArray
 import com.edu.sun.oereminder.utils.parseJsonObject
 import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 
 class MessageRemoteDataSource private constructor(private val prefsHelper: PreferencesHelper) :
     MessageDataSource.Remote {
@@ -72,11 +75,15 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
             METHOD_POST,
             "$BASE_URL$ENDPOINT_ROOMS/${prefsHelper.getRoomId()}$ENDPOINT_MESSAGES",
             mapOf(KEY_TOKEN_CHATWORK to prefsHelper.getApiToken()),
-            mapOf(KEY_BODY to message),
+            mapOf(KEY_BODY to "${prefsHelper.getTrainerGroup()}$message"),
             object : SourceCallback<String> {
 
                 override fun onSuccess(data: String) {
-                    callback.onSuccess(data)
+                    try {
+                        callback.onSuccess(JSONObject(data).getString(MESSAGE_ID))
+                    } catch (e: IOException) {
+                        callback.onError(e)
+                    }
                 }
 
                 override fun onError(e: Exception) {
@@ -86,16 +93,20 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
         )
     }
 
-    override fun updateMessage(messageId: Int, content: String, callback: SourceCallback<String>) {
+    override fun updateMessage(messageId: Long, content: String, callback: SourceCallback<String>) {
         HttpUtils.requestApi(
             METHOD_PUT,
             "$BASE_URL$ENDPOINT_ROOMS/${prefsHelper.getRoomId()}$ENDPOINT_MESSAGES/$messageId",
             mapOf(KEY_TOKEN_CHATWORK to prefsHelper.getApiToken()),
-            mapOf(KEY_BODY to content),
+            mapOf(KEY_BODY to "${prefsHelper.getTrainerGroup()}$content"),
             object : SourceCallback<String> {
 
                 override fun onSuccess(data: String) {
-                    callback.onSuccess(data)
+                    try {
+                        callback.onSuccess(JSONObject(data).getString(MESSAGE_ID))
+                    } catch (e: IOException) {
+                        callback.onError(e)
+                    }
                 }
 
                 override fun onError(e: Exception) {
@@ -105,7 +116,7 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
         )
     }
 
-    override fun deleteMessage(messageId: Int, callback: SourceCallback<String>) {
+    override fun deleteMessage(messageId: Long, callback: SourceCallback<String>) {
         HttpUtils.requestApi(
             METHOD_DELETE,
             "$BASE_URL$ENDPOINT_ROOMS/${prefsHelper.getRoomId()}$ENDPOINT_MESSAGES/$messageId",
@@ -113,7 +124,11 @@ class MessageRemoteDataSource private constructor(private val prefsHelper: Prefe
             object : SourceCallback<String> {
 
                 override fun onSuccess(data: String) {
-                    callback.onSuccess(data)
+                    try {
+                        callback.onSuccess(JSONObject(data).getString(MESSAGE_ID))
+                    } catch (e: IOException) {
+                        callback.onError(e)
+                    }
                 }
 
                 override fun onError(e: Exception) {
