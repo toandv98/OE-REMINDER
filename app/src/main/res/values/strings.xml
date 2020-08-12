@@ -23,4 +23,16 @@
     <string name="description_icon_info">icon info</string>
     <string name="title_search">Search</string>
     <string name="hint_search_report">Search report</string>
+    <string name="description_send_image">Send report</string>
+    <string name="label_message">Message</string>
+    <string name="label_plan">Plan</string>
+    <string name="label_actual">Actual</string>
+    <string name="label_next">Next</string>
+    <string name="label_issue">Issue</string>
+    <string name="title_send">Send</string>
+    <string name="label_report">Report</string>
+    <string name="plan_title_default">Em gửi plan hôm nay</string>
+    <string name="report_title_default">Em gửi report cuối ngày</string>
+    <string name="plan_format">\n%s\n[info]\n[title]1. Plan %s[/title]\n%s\n[/info]</string>
+    <string name="report_format">\n%s\n[info]\n[title]1. Plan:[/title]\n%s\n[title]2. Actual:[/title]\n%s\n[title]3. Next:[/title]\n%s\n[title]4. Issue:[/title]\n%s\n[/info]</string>
 </resources>

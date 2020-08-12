@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layoutAppBar"
+        layout="@layout/toolbar_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:scaleX="@dimen/scale_1.3"
+        android:scaleY="@dimen/scale_1.3"
+        android:textOff="@string/label_plan"
+        android:textOn="@string/label_report"
+        android:textSize="@dimen/sp_16"
+        android:thumb="@drawable/thumb_tabs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutAppBar"
+        app:showText="true"
+        app:track="@drawable/track_tabs" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchReport">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout.OutlinedBox"
+                android:hint="@string/label_message"
+                app:startIconDrawable="@drawable/ic_message">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtMessage"
+                    style="@style/TextInputEditText.Custom" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout.OutlinedBox"
+                android:hint="@string/label_plan"
+                app:startIconDrawable="@drawable/ic_round_ballot">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPlan"
+                    style="@style/TextInputEditText.Custom" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutActual"
+                style="@style/TextInputLayout.OutlinedBox"
+                android:hint="@string/label_actual"
+                android:visibility="gone"
+                app:startIconDrawable="@drawable/ic_round_check_circle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtActual"
+                    style="@style/TextInputEditText.Custom" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutNext"
+                style="@style/TextInputLayout.OutlinedBox"
+                android:hint="@string/label_next"
+                android:visibility="gone"
+                app:startIconDrawable="@drawable/ic_round_redo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNext"
+                    style="@style/TextInputEditText.Custom" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutIssue"
+                style="@style/TextInputLayout.OutlinedBox"
+                android:hint="@string/label_issue"
+                android:visibility="gone"
+                app:startIconDrawable="@drawable/ic_round_bug_report">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtIssue"
+                    style="@style/TextInputEditText.Custom" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textLabelReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_16"
+        android:text="@string/label_report"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintBottom_toBottomOf="@+id/switchReport"
+        app:layout_constraintEnd_toEndOf="@+id/switchReport"
+        app:layout_constraintTop_toTopOf="@+id/switchReport" />
+
+    <TextView
+        android:id="@+id/textLabelPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8"
+        android:text="@string/label_plan"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_16"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/switchReport"
+        app:layout_constraintStart_toStartOf="@+id/switchReport"
+        app:layout_constraintTop_toTopOf="@+id/switchReport" />
+</androidx.constraintlayout.widget.ConstraintLayout>
