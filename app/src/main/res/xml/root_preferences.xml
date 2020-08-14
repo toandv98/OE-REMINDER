@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:key="@string/key_profile"
+        app:layout="@layout/layout_profile" />
+
+    <EditTextPreference
+        android:icon="@drawable/ic_key"
+        android:key="@string/key_token"
+        android:summary="@string/summary_token"
+        android:title="@string/title_api_token"
+        app:allowDividerAbove="true"
+        app:dialogIcon="@drawable/ic_key" />
+
+    <Preference
+        android:icon="@drawable/ic_calendar"
+        android:key="@string/key_time_sheet"
+        android:summary="@string/summary_time_sheet"
+        android:title="@string/title_time_sheet" />
+
+    <Preference
+        android:icon="@drawable/ic_trainer"
+        android:key="@string/key_mention"
+        android:summary="@string/summary_mention"
+        android:title="@string/title_mention" />
+
+    <Preference
+        android:icon="@drawable/ic_round_chat"
+        android:key="@string/key_room"
+        android:summary="@string/summary_room"
+        android:title="@string/title_room" />
+
+    <Preference
+        android:icon="@drawable/ic_outline_info"
+        android:key="@string/key_about"
+        android:summary="@string/summary_about"
+        android:title="@string/title_about" />
+
+</PreferenceScreen>

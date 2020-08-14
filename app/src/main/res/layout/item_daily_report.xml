@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/description_icon_info"
-        android:tint="@color/color_accent"
+        app:tint="@color/color_accent"
         app:layout_constraintStart_toStartOf="@+id/textReport"
         app:layout_constraintTop_toTopOf="@+id/textReport"
         app:srcCompat="@drawable/ic_outline_info" />
