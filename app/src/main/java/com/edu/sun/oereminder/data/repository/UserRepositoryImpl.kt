@@ -15,6 +15,10 @@ class UserRepositoryImpl private constructor(
 
     override fun getProfile(callback: SourceCallback<Account?>) {
         with(appExecutors) {
+            diskIO.execute {
+                val data = local.getProfile()
+                mainThread.execute { callback.onSuccess(data) }
+            }
             networkIO.execute {
                 remote.getProfile(object : SourceCallback<Account> {
 
@@ -24,13 +28,7 @@ class UserRepositoryImpl private constructor(
                     }
 
                     override fun onError(e: Exception) {
-                        diskIO.execute {
-                            val cached = local.getProfile()
-                            mainThread.execute {
-                                callback.onError(e)
-                                callback.onSuccess(cached)
-                            }
-                        }
+                        mainThread.execute { callback.onError(e) }
                     }
                 })
             }
