@@ -44,6 +44,7 @@ class ReportAdapter : ListAdapter<Message, ViewHolder>(ReportItemCallback()) {
 
         fun bind(message: Message) = itemView.run {
             with(message) {
+                msg = this
                 textDate.text = sendCalendar.toDate()
                 textSendTime.text =
                     if (updateTime == 0L) sendCalendar.toTime() else updateCalendar.toTime()

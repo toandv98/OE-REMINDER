@@ -25,8 +25,8 @@ interface MessageDataSource {
 
         fun sendMessage(message: String, callback: SourceCallback<String>)
 
-        fun updateMessage(messageId: Int, content: String, callback: SourceCallback<String>)
+        fun updateMessage(messageId: Long, content: String, callback: SourceCallback<String>)
 
-        fun deleteMessage(messageId: Int, callback: SourceCallback<String>)
+        fun deleteMessage(messageId: Long, callback: SourceCallback<String>)
     }
 }

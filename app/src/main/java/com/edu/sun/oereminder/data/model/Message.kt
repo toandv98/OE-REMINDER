@@ -1,7 +1,9 @@
 package com.edu.sun.oereminder.data.model
 
+import android.os.Parcelable
 import com.edu.sun.oereminder.data.source.local.dbutils.Column
 import com.edu.sun.oereminder.data.source.local.dbutils.Table
+import com.edu.sun.oereminder.utils.*
 import com.edu.sun.oereminder.utils.ColumnName.ACCOUNT
 import com.edu.sun.oereminder.utils.ColumnName.ACCOUNT_ID
 import com.edu.sun.oereminder.utils.ColumnName.AVATAR_URL
@@ -11,21 +13,22 @@ import com.edu.sun.oereminder.utils.ColumnName.NAME
 import com.edu.sun.oereminder.utils.ColumnName.SEND_TIME
 import com.edu.sun.oereminder.utils.ColumnName.UPDATE_TIME
 import com.edu.sun.oereminder.utils.SQLiteConst.TABLE_NAME_MESSAGE
-import com.edu.sun.oereminder.utils.from
+import kotlinx.android.parcel.Parcelize
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
+@Parcelize
 @Table(TABLE_NAME_MESSAGE)
 data class Message(
-    @Column(columnName = MESSAGE_ID, primaryKey = true) val messageId: Long,
-    @Column(columnName = BODY) val body: String,
-    @Column(columnName = SEND_TIME) val sendTime: Long,
-    @Column(columnName = UPDATE_TIME) val updateTime: Long,
-    @Column(columnName = ACCOUNT_ID) val accountId: Long,
-    @Column(columnName = AVATAR_URL) val avatarUrl: String,
-    @Column(columnName = NAME) val name: String
-) {
+    @Column(columnName = MESSAGE_ID, primaryKey = true) val messageId: Long = 0,
+    @Column(columnName = BODY) var body: String = "",
+    @Column(columnName = SEND_TIME) val sendTime: Long = 0,
+    @Column(columnName = UPDATE_TIME) val updateTime: Long = 0,
+    @Column(columnName = ACCOUNT_ID) val accountId: Long = 0,
+    @Column(columnName = AVATAR_URL) val avatarUrl: String = "",
+    @Column(columnName = NAME) val name: String = ""
+) : Parcelable {
     @Throws(JSONException::class)
     constructor(jsonObject: JSONObject) : this(
         jsonObject.getLong(MESSAGE_ID),
@@ -45,18 +48,16 @@ data class Message(
 
     val isReport get() = body.contains(REPORT_REGEX.toRegex())
 
-    val messageTitle
-        get() = body.replace(MESSAGE_TO_REGEX.toRegex(), "")
-            .replace(PLAN_REGEX.toRegex(), "").trim()
+    val messageTitle get() = body.remove(MESSAGE_TO_REGEX).remove(PLAN_REGEX).trim()
 
     val messageReport: String
         get() = PLAN_REGEX.toRegex().find(body)?.value?.run {
-            replace(INFO_NOTATION.toRegex(), "")
-            replace(FIRST_LAST_END_LINE.toRegex(), "")
-            replace(END_LINE, HTML_END_LINE)
-            replace(TITLE_OPEN_NOTATION.toRegex(), TAG_B_OPEN)
-            replace(TITLE_CLOSE_NOTATION.toRegex(), TAG_B_CLOSE)
-            trim()
+            remove(INFO_NOTATION)
+                .trimEndLine()
+                .toHtmlEndLine()
+                .replaceWithRegex(TITLE_OPEN_NOTATION, TAG_B_OPEN)
+                .replaceWithRegex(TITLE_CLOSE_NOTATION, TAG_B_CLOSE)
+                .trim()
         } ?: ""
 
     companion object {
@@ -68,8 +69,14 @@ data class Message(
         const val INFO_NOTATION = "\\[\\S?info]"
         const val TAG_B_OPEN = "<font color='#000'><b>"
         const val TAG_B_CLOSE = "</b></font>"
-        const val FIRST_LAST_END_LINE = "^\\n|\\n\$"
-        const val HTML_END_LINE = "<br>"
-        const val END_LINE = "\n"
+        private const val PLAN_TITLE_REGEX = "<font color='#000'><b>1. Plan:</b></font>"
+        private const val ACTUAL_TITLE_REGEX = "<font color='#000'><b>2. Actual:</b></font>"
+        private const val NEXT_TITLE_REGEX = "<font color='#000'><b>3. Next:</b></font>"
+        private const val ISSUE_TITLE_REGEX = "<font color='#000'><b>4. Issue:</b></font>"
+        const val PLAN_CONTENT_REGEX = "<font color='#000'><b>1. Plan [\\s\\S]*</b></font>"
+        const val REPORT_PLAN_REGEX = "$PLAN_TITLE_REGEX|$ACTUAL_TITLE_REGEX[\\s\\S]*"
+        const val ACTUAL_CONTENT_REGEX = "[\\s\\S]*$ACTUAL_TITLE_REGEX|$NEXT_TITLE_REGEX[\\s\\S]*"
+        const val NEXT_CONTENT_REGEX = "[\\s\\S]*$NEXT_TITLE_REGEX|$ISSUE_TITLE_REGEX[\\s\\S]*"
+        const val ISSUE_CONTENT_REGEX = "[\\s\\S]*$ISSUE_TITLE_REGEX"
     }
 }

@@ -45,6 +45,7 @@
         <item name="android:layout_marginStart">@dimen/dp_16</item>
         <item name="android:layout_marginBottom">@dimen/dp_16</item>
         <item name="android:layout_marginEnd">@dimen/dp_16</item>
+        <item name="endIconMode">clear_text</item>
     </style>
 
     <style name="TextInputEditText.Custom" parent="ThemeOverlay.MaterialComponents.TextInputEditText">

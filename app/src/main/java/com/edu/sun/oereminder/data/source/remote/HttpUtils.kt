@@ -57,10 +57,11 @@ object HttpUtils {
         }
         var httpURLConnection: HttpURLConnection? = null
         try {
-            httpURLConnection = (URL(urlString).openConnection() as HttpURLConnection).apply {
+            httpURLConnection = URL(urlString).openConnection() as HttpURLConnection
+            httpURLConnection.run {
                 setRequestProperty("accept", "*/*")
                 setRequestProperty("connection", "Keep-Alive")
-                setRequestProperty("Content-Length", out.length.toString())
+                setRequestProperty("Content-Length", out.toString().toByteArray().size.toString())
                 headers.forEach {
                     setRequestProperty(it.key, it.value)
                 }
@@ -74,7 +75,6 @@ object HttpUtils {
                 PrintWriter(outputStream).apply {
                     write(out.toString())
                     flush()
-                    close()
                 }
                 response(callback)
             }

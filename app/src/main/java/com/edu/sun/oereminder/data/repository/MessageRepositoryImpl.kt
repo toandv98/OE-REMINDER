@@ -21,8 +21,11 @@ class MessageRepositoryImpl private constructor(
                 remote.getMessages(object : SourceCallback<List<Message>> {
 
                     override fun onSuccess(data: List<Message>) {
-                        mainThread.execute { callback.onSuccess(data.reversed()) }
-                        diskIO.execute { local.updateMessages(data) }
+                        diskIO.execute {
+                            local.updateMessages(data)
+                            val localData = local.getMessages()
+                            mainThread.execute { callback.onSuccess(localData) }
+                        }
                     }
 
                     override fun onError(e: Exception) {
@@ -33,24 +36,34 @@ class MessageRepositoryImpl private constructor(
         }
     }
 
-    override fun sendMessage(message: String, callback: SourceCallback<Message>) {
+    override fun getUpdatedMessage(messageId: Long, callback: SourceCallback<List<Message>>) {
+        with(appExecutors) {
+            networkIO.execute {
+                remote.getMessage(messageId.toString(), object : SourceCallback<Message> {
+
+                    override fun onSuccess(data: Message) {
+                        diskIO.execute {
+                            local.updateMessages(listOf(data))
+                            val localData = local.getMessages()
+                            mainThread.execute { callback.onSuccess(localData) }
+                        }
+                    }
+
+                    override fun onError(e: Exception) {
+                        mainThread.execute { callback.onError(e) }
+                    }
+                })
+            }
+        }
+    }
+
+    override fun sendMessage(message: String, callback: SourceCallback<Long>) {
         with(appExecutors) {
             networkIO.execute {
                 remote.sendMessage(message, object : SourceCallback<String> {
 
                     override fun onSuccess(data: String) {
-                        remote.getMessage(data, object : SourceCallback<Message> {
-                            override fun onSuccess(data: Message) {
-                                diskIO.execute {
-                                    local.addMessage(data)
-                                    mainThread.execute { callback.onSuccess(data) }
-                                }
-                            }
-
-                            override fun onError(e: Exception) {
-                                mainThread.execute { callback.onError(e) }
-                            }
-                        })
+                        mainThread.execute { callback.onSuccess(data.toLongOrNull() ?: 0L) }
                     }
 
                     override fun onError(e: Exception) {
@@ -61,24 +74,13 @@ class MessageRepositoryImpl private constructor(
         }
     }
 
-    override fun updateMessage(messageId: Int, message: String, callback: SourceCallback<Message>) {
+    override fun updateMessage(messageId: Long, message: String, callback: SourceCallback<Long>) {
         with(appExecutors) {
             networkIO.execute {
                 remote.updateMessage(messageId, message, object : SourceCallback<String> {
 
                     override fun onSuccess(data: String) {
-                        remote.getMessage(data, object : SourceCallback<Message> {
-                            override fun onSuccess(data: Message) {
-                                diskIO.execute {
-                                    local.updateMessage(data)
-                                    mainThread.execute { callback.onSuccess(data) }
-                                }
-                            }
-
-                            override fun onError(e: Exception) {
-                                mainThread.execute { callback.onError(e) }
-                            }
-                        })
+                        mainThread.execute { callback.onSuccess(data.toLongOrNull() ?: 0L) }
                     }
 
                     override fun onError(e: Exception) {
@@ -89,24 +91,18 @@ class MessageRepositoryImpl private constructor(
         }
     }
 
-    override fun deleteMessage(messageId: Int, callback: SourceCallback<Long>) {
+    override fun deleteMessage(messageId: Long, callback: SourceCallback<List<Message>>) {
         with(appExecutors) {
             networkIO.execute {
                 remote.deleteMessage(messageId, object : SourceCallback<String> {
 
                     override fun onSuccess(data: String) {
-                        remote.getMessage(data, object : SourceCallback<Message> {
-                            override fun onSuccess(data: Message) {
-                                diskIO.execute {
-                                    local.deleteMessage(data)
-                                    mainThread.execute { callback.onSuccess(data.messageId) }
-                                }
-                            }
-
-                            override fun onError(e: Exception) {
-                                mainThread.execute { callback.onError(e) }
-                            }
-                        })
+                        val msgId = data.toLongOrNull() ?: 0L
+                        diskIO.execute {
+                            local.deleteMessage(Message(msgId))
+                            val updateList = local.getMessages()
+                            mainThread.execute { callback.onSuccess(updateList) }
+                        }
                     }
 
                     override fun onError(e: Exception) {

@@ -6,4 +6,6 @@ interface PreferencesHelper {
     fun getRoomId(): String
 
     fun getAccountId(): Long
+
+    fun getTrainerGroup(): String
 }
