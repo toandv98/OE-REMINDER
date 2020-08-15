@@ -5,5 +5,6 @@
     <color name="color_titan_white">#F0F2FF</color>
     <color name="color_accent">#617FDE</color>
     <color name="color_bg_track">#1C000000</color>
-    <color name="color_de_york">#75CD9B</color>
+    <color name="color_de_york">#80DE63</color>
+    <color name="color_blush">#DE6380</color>
 </resources>
