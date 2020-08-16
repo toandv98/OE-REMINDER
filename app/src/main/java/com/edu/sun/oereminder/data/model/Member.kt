@@ -15,7 +15,7 @@ data class Member(
     @Column(columnName = ACCOUNT_ID, primaryKey = true) val accountId: Long,
     @Column(columnName = AVATAR_URL) val avatarUrl: String,
     @Column(columnName = NAME) val name: String,
-    @Column(columnName = ROLE) val role: String
+    @Column(columnName = ROLE) var role: String
 ) {
     @Throws(JSONException::class)
     constructor(jsonObject: JSONObject) : this(
