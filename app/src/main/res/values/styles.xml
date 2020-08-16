@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="snackbarStyle">@style/StyleSnackbar</item>
     </style>
 
     <style name="SplashScreenStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -52,6 +53,48 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="ChipChoiceStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_chip</item>
+        <item name="chipBackgroundColor">@color/bg_chip</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="android:textAppearance">@style/ChipTextAppearance</item>
+    </style>
+
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="ChipEntryStyle" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="closeIconVisible">false</item>
+        <item name="chipBackgroundColor">@android:color/white</item>
+        <item name="chipStrokeColor">@color/color_accent</item>
+        <item name="chipStrokeWidth">@dimen/dp_1</item>
+        <item name="checkedIcon">@drawable/ic_round_check_circle</item>
+        <item name="checkedIconTint">@color/color_blush</item>
+        <item name="android:textAppearance">@style/ChipTextAppearance</item>
+    </style>
+
+    <style name="StyleTextViewPicker" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_accent</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StyleSnackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">@null</item>
+        <item name="android:layout_marginBottom">@dimen/dp_56</item>
     </style>
 
 </resources>

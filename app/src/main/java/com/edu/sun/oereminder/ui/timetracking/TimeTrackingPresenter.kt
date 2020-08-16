@@ -40,7 +40,7 @@ class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository
         })
 
     override fun selectedDate(from: Long, to: Long) = timeSheetRepository.getTimeRecords(
-        from, to,
+        from, to, false,
         object : SourceCallback<List<TimeRecord>> {
             override fun onSuccess(data: List<TimeRecord>) {
                 view?.updateRecyclerView(data)
@@ -69,9 +69,18 @@ class TimeTrackingPresenter(private val timeSheetRepository: TimeSheetRepository
                 }
                 CODE_SEND_REPORT -> view?.navigateToSendReport(isCheckIn)
             }
-            timeSheetRepository.updateTimeRecord(this)
-            view?.updateRecyclerView(this)
-            view?.updateFab(isShowFab, isCheckIn)
+            timeSheetRepository.updateTimeRecord(this, object : SourceCallback<Int> {
+                override fun onSuccess(data: Int) {
+                    view?.let {
+                        it.updateRecyclerView(this@run)
+                        it.updateFab(isShowFab, isCheckIn)
+                    }
+                }
+
+                override fun onError(e: Exception) {
+                    view?.showMessage(e.message.toString())
+                }
+            })
         }
     }
 }

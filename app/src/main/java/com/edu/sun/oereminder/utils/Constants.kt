@@ -81,6 +81,11 @@ object WorkTime {
     const val FINISH_HOUR = 16L
     const val FINISH_MINUS = 45L
 
+    const val DATE_PATTERN = "dd"
+    const val WHOLE_DAY = "W"
+    const val MORNING = "M"
+    const val AFTERNOON = "A"
+    const val OFF = "O"
     const val ON_TIME = "On Time"
     const val LATE = "Late"
 }

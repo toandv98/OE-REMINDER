@@ -9,6 +9,7 @@ import com.edu.sun.oereminder.utils.ColumnName.TIME_IN
 import com.edu.sun.oereminder.utils.ColumnName.TIME_OUT
 import com.edu.sun.oereminder.utils.ColumnName.WORK_DATE
 import com.edu.sun.oereminder.utils.SQLiteConst.TABLE_NAME_TIME_RECORDS
+import com.edu.sun.oereminder.utils.WorkTime.OFF
 import com.edu.sun.oereminder.utils.from
 import java.util.*
 
@@ -18,7 +19,7 @@ data class TimeRecord(
     @Column(columnName = WORK_DATE) var workDate: Long = 0,
     @Column(columnName = TIME_IN) var timeIn: Long = 0,
     @Column(columnName = TIME_OUT) var timeOut: Long = 0,
-    @Column(columnName = PART_OF_DAY) var partOfDay: String = "",
+    @Column(columnName = PART_OF_DAY) var partOfDay: String = OFF,
     @Column(columnName = STATUS) var status: String = ""
 ) {
 
