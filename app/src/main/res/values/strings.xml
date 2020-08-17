@@ -23,7 +23,6 @@
     <string name="description_icon_info">icon info</string>
     <string name="title_search">Search</string>
     <string name="hint_search_report">Search report</string>
-    <string name="description_send_image">Send report</string>
     <string name="label_message">Message</string>
     <string name="label_plan">Plan</string>
     <string name="label_actual">Actual</string>
@@ -37,8 +36,6 @@
     <string name="report_format">\n%s\n[info]\n[title]1. Plan:[/title]\n%s\n[title]2. Actual:[/title]\n%s\n[title]3. Next:[/title]\n%s\n[title]4. Issue:[/title]\n%s\n[/info]</string>
     <string name="title_delete">Delete</string>
     <string name="label_confirm">Are you sure you want to delete this report?</string>
-    <string name="default_chat_room">Default chat room</string>
-    <string name="default_room_id">122972613</string>
     <string name="description_avatar">avatar</string>
     <string name="key_profile">profile</string>
     <string name="title_api_token">ChatWork API Token</string>
@@ -57,4 +54,24 @@
     <string name="summary_about">About this app</string>
     <string name="title_about">About</string>
     <string name="key_toolbar">key_toolbar</string>
+    <string name="label_w">W</string>
+    <string name="label_a">A</string>
+    <string name="label_m">M</string>
+    <string name="label_whole">Whole day</string>
+    <string name="label_afternoon">Afternoon</string>
+    <string name="label_morning">Morning</string>
+    <string name="description_arrow">Arrow</string>
+    <string name="label_pick_month">Pick month</string>
+    <string name="label_bulk_select">Bulk select</string>
+    <string name="title_save_time_sheet">Save</string>
+    <string name="title_biometric">Edit Chatwork api token</string>
+    <string name="sub_title_biometric">Unlock using your biometric credential</string>
+    <string name="msg_auth_failed">Authentication Failed</string>
+    <string name="msg_not_secure">Your device isn\'t secured with a PIN, pattern or password.</string>
+    <string name="action_open_settings">Open Setting</string>
+    <string name="hint_enter_token">Enter Chatwork API token</string>
+    <string name="title_save">Save</string>
+    <string name="title_edit_token">Edit API Token</string>
+    <string name="text_tips">You can also login and get tokens here</string>
+    <string name="msg_required_field">This field is required</string>
 </resources>

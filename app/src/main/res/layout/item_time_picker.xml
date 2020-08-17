@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_8"
+    android:background="@drawable/bg_item_time_picker"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_date_time"
+        android:gravity="center"
+        android:padding="@dimen/dp_4"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupDate"
+        style="@style/Widget.MaterialComponents.ChipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/dp_4"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipW"
+            style="@style/ChipChoiceStyle"
+            android:text="@string/label_w" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipA"
+            style="@style/ChipChoiceStyle"
+            android:text="@string/label_a" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipM"
+            style="@style/ChipChoiceStyle"
+            android:text="@string/label_m" />
+    </com.google.android.material.chip.ChipGroup>
+</LinearLayout>

@@ -31,9 +31,9 @@ fun GregorianCalendar.lastDayOfMonth() = this.apply {
 
 fun GregorianCalendar.from(date: Long) = this.apply { timeInMillis = date }
 
-fun firstMillisOfMonth() = GregorianCalendar().firstDayOfMonth().timeInMillis
+fun firstMillisOfMonth() = GregorianCalendar().firstDayOfMonth().firstMillisOfDay()
 
-fun lastMillisOfMonth() = GregorianCalendar().lastDayOfMonth().timeInMillis
+fun lastMillisOfMonth() = GregorianCalendar().lastDayOfMonth().lastMillisOfDay()
 
 fun firstMillisOfDay() = GregorianCalendar().firstMillisOfDay()
 
@@ -55,3 +55,11 @@ fun GregorianCalendar.lastMillisOfDay() = this.apply {
 
 fun millisUtil(hour: Long, minus: Long) =
     firstMillisOfDay().plus(TimeUnit.HOURS.toMillis(hour)).plus(TimeUnit.MINUTES.toMillis(minus))
+
+fun GregorianCalendar.plus(field: Int, value: Int) = this.apply {
+    set(field, get(field) + value)
+}
+
+fun GregorianCalendar.minus(field: Int, value: Int) = this.apply {
+    set(field, get(field) - value)
+}

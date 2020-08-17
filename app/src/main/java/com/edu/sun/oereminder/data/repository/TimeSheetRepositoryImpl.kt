@@ -26,11 +26,12 @@ class TimeSheetRepositoryImpl(
     override fun getTimeRecords(
         from: Long,
         to: Long,
+        isEdit: Boolean,
         callback: SourceCallback<List<TimeRecord>>
     ) {
         with(appExecutors) {
             diskIO.execute {
-                val timeRecords = local.getTimeRecords(from, to)
+                val timeRecords = local.getTimeRecords(from, to, isEdit)
                 mainThread.execute { callback.onSuccess(timeRecords) }
             }
         }
@@ -50,27 +51,37 @@ class TimeSheetRepositoryImpl(
         }
     }
 
-    override fun updateTimeRecord(timeRecord: TimeRecord) {
-        appExecutors.diskIO.execute {
-            local.updateTimeRecord(timeRecord)
+    override fun updateTimeRecord(timeRecord: TimeRecord, callback: SourceCallback<Int>) {
+        appExecutors.run {
+            diskIO.execute {
+                local.updateTimeRecord(timeRecord)
+                mainThread.execute { callback.onSuccess(DONE) }
+            }
         }
     }
 
-    override fun addTimeSheet(timeRecords: List<TimeRecord>) {
-        appExecutors.diskIO.execute {
-            local.addTimeSheet(timeRecords)
+    override fun addTimeSheet(timeRecords: List<TimeRecord>, callback: SourceCallback<Int>) {
+        appExecutors.run {
+            diskIO.execute {
+                local.addTimeSheet(timeRecords)
+                mainThread.execute { callback.onSuccess(DONE) }
+            }
         }
     }
 
-    override fun updateTimeSheet(timeRecords: List<TimeRecord>) {
-        appExecutors.diskIO.execute {
-            local.updateTimeSheet(timeRecords)
+    override fun updateTimeSheet(timeRecords: List<TimeRecord>, callback: SourceCallback<Int>) {
+        appExecutors.run {
+            diskIO.execute {
+                local.updateTimeSheet(timeRecords)
+                mainThread.execute { callback.onSuccess(DONE) }
+            }
         }
     }
 
     companion object {
         @Volatile
         private var INSTANCE: TimeSheetRepository? = null
+        const val DONE = 1
 
         fun getInstance(
             local: TimeSheetDataSource.Local,
