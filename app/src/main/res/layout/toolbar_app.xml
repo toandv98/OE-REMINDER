@@ -13,7 +13,7 @@
         android:background="?android:attr/colorBackground"
         android:paddingStart="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_8"
-        android:theme="@style/Widget.MaterialComponents.Toolbar"
+        android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
         app:elevation="0dp"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
         app:titleTextColor="@color/color_accent" />

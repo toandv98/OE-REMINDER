@@ -13,12 +13,15 @@ object StatementConst {
     const val PRIMARY_KEY = "PRIMARY KEY "
     const val AUTO_INCREMENT = "AUTOINCREMENT "
     const val EQUAL = " =? "
+    const val NOT_EQUAL = " !=? "
     const val GREATER = " >? "
     const val LESS = " <? "
     const val GREATER_OR_EQUAL = " >=? "
     const val LESS_OR_EQUAL = " <=? "
     const val BETWEEN = " between ? and ? "
     const val DESC = " desc "
+    const val ASC = " asc "
+    const val AND = " and "
 }
 
 data class DatabaseSchema(

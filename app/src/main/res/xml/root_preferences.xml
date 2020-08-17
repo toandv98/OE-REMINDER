@@ -5,13 +5,12 @@
         android:key="@string/key_profile"
         app:layout="@layout/layout_profile" />
 
-    <EditTextPreference
+    <Preference
         android:icon="@drawable/ic_key"
         android:key="@string/key_token"
         android:summary="@string/summary_token"
         android:title="@string/title_api_token"
-        app:allowDividerAbove="true"
-        app:dialogIcon="@drawable/ic_key" />
+        app:allowDividerAbove="true" />
 
     <Preference
         android:icon="@drawable/ic_calendar"
